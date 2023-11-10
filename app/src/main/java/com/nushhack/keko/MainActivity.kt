@@ -90,6 +90,20 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_image -> {
+                photoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { res ->
+                    if (res.resultCode == Activity.RESULT_OK) {
+//                        photoChanged = true
+//                        photoUri = res.data?.data!!
+//                        binding.pfpImageview.setImageURI(photoUri)
+//                        updateButton()
+                        android.widget.Toast.makeText(context, "gg", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                val imageIntent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
+                photoLauncher.launch(imageIntent)
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
