@@ -23,4 +23,6 @@
     <string name="intent_lesson_id">lesson_id</string>
     <string name="question_number_template">Question %d</string>
     <string name="submit_text">Submit</string>
+
+    <string name="key_path">path</string>
 </resources>

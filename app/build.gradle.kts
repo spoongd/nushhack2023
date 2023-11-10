@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.nushhack.keko"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.nushhack.keko"
@@ -54,7 +54,12 @@ dependencies {
     implementation("androidx.camera:camera-view:${cameraxVersion}")
     implementation("androidx.camera:camera-extensions:${cameraxVersion}")
     implementation("me.relex:circleindicator:2.1.6")
+
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+
     implementation("com.android.volley:volley:1.2.1")
+    implementation("io.coil-kt:coil:2.5.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
