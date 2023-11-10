@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_item_1"
+        android:enabled="true"
+        android:icon="@drawable/nav_lessons_icon"
+        android:title="@string/nav_lessons_text"/>
+    <item
+        android:id="@+id/nav_item_2"
+        android:enabled="true"
+        android:icon="@drawable/nav_scan_icon"
+        android:title="@string/nav_scan_text"/>
+    <item
+        android:id="@+id/nav_item_3"
+        android:enabled="true"
+        android:icon="@drawable/nav_account_icon"
+        android:title="@string/nav_account_text"/>
+
+</menu>
