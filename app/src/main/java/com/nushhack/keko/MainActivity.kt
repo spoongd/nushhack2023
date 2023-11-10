@@ -14,7 +14,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.nushhack.keko.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var photoLauncher: ActivityResultLauncher<Intent>
 

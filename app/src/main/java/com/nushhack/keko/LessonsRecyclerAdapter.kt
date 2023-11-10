@@ -1,6 +1,7 @@
 package com.nushhack.keko
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,13 +24,17 @@ class LessonsRecyclerAdapter(private val lessons: JSONObject) : RecyclerView.Ada
         holder.bind(id, lesson)
     }
 
-    override fun getItemCount() = 0
+    override fun getItemCount() = lessons.length()
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private var title: TextView = view.findViewById(R.id.lesson_title)
         fun bind(id: String, lesson: JSONObject) {
-//            title =
-
+            title.text = lesson.getString("title")
+            view.setOnClickListener {
+                val intent = Intent(view.context, LessonActivity::class.java)
+                intent.putExtra(view.context.getString(R.string.intent_lesson_id), id)
+                view.context.startActivity(intent)
+            }
         }
     }
 }

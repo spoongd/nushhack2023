@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
@@ -25,12 +26,11 @@ class PackagesRecyclerAdapter(private val packages: JSONObject, private val less
         val title = pack.getString("title")
         val lessonIds = pack.getJSONArray("lessons")
         val packLessons = JSONObject()
-
         for (i in 0..<lessonIds.length()) {
             val lessonId = lessonIds[i] as String
-            pack.put(lessonId, lessons.getJSONObject(lessonId))
+            packLessons.put(lessonId, lessons.getJSONObject(lessonId))
         }
-        holder.bind(title, pack)
+        holder.bind(title, packLessons)
     }
 
     override fun getItemCount() = packages.length() // TODO
@@ -43,6 +43,7 @@ class PackagesRecyclerAdapter(private val packages: JSONObject, private val less
             title.text = name
             recycler.layoutManager = LinearLayoutManager(view.context)
             recycler.adapter = LessonsRecyclerAdapter(pack)
+            recycler.addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
         }
     }
 }
