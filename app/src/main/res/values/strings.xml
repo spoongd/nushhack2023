@@ -54,4 +54,7 @@
     <string name="scan_title">Scan</string>
     <string name="account_title">Account</string>
     <string name="app_title">Keko</string>
+    <string name="welcome_message">Hello %s!</string>
+    <string name="your_lessons_title">Your lessons</string>
+    <string name="welcome_message_2">Welcome to Keko!</string>
 </resources>
