@@ -49,4 +49,8 @@
     <string name="nav_account_text">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lessons_title">Lessons</string>
+    <string name="scan_title">Scan</string>
+    <string name="account_title">Account</string>
+    <string name="app_title">Keko</string>
 </resources>

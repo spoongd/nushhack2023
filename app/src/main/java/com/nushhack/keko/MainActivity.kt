@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
+import androidx.viewpager2.widget.ViewPager2
 import com.nushhack.keko.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +36,46 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.content.viewPager.adapter = MainViewPagerAdapter(supportFragmentManager, lifecycle)
-//        binding.content.viewPager.isUserInputEnabled = false
+        binding.content.viewPager.isUserInputEnabled = false
+
+        binding.content.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+                if (!binding.toolbarTitle2.isVisible) binding.toolbarTitle2.isVisible = true
+
+                binding.toolbarTitle.translationX = -positionOffset * binding.toolbar.width
+                binding.toolbarTitle2.translationX = -positionOffset * binding.toolbar.width + binding.toolbar.width
+
+                binding.toolbarTitle2.text = when (position) {
+                    0 -> getString(R.string.scan_title)
+                    1 -> getString(R.string.account_title)
+                    else -> getString(R.string.app_title)
+                }
+
+                binding.toolbarTitle.text = when (position) {
+                    0 -> getString(R.string.lessons_title)
+                    1 -> getString(R.string.scan_title)
+                    2 -> getString(R.string.account_title)
+                    else -> getString(R.string.app_title)
+                }
+
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                when(state) {
+                    ViewPager2.SCROLL_STATE_IDLE -> {
+                        if (binding.toolbarTitle2.isVisible) binding.toolbarTitle2.isVisible = false
+                    }
+                    else -> {}
+                }
+                super.onPageScrollStateChanged(state)
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
