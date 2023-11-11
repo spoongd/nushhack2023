@@ -24,23 +24,33 @@ class PackagesRecyclerAdapter(private val packages: JSONObject, private val less
         val id = packages.names()?.get(position).toString()
         val pack = packages.getJSONObject(id)
         val title = pack.getString("title")
+        val tags = pack.getJSONArray("tags")
+        val difficulty = pack.getInt("difficulty")
         val lessonIds = pack.getJSONArray("lessons")
         val packLessons = JSONObject()
         for (i in 0..<lessonIds.length()) {
             val lessonId = lessonIds[i] as String
             packLessons.put(lessonId, lessons.getJSONObject(lessonId))
         }
-        holder.bind(title, packLessons)
+        holder.bind(title, tags, difficulty, packLessons)
     }
 
     override fun getItemCount() = packages.length() // TODO
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        private var title: TextView = view.findViewById(R.id.lesson_package_title)
+        private var titleView: TextView = view.findViewById(R.id.lesson_package_title)
+        private var tagsView: TextView = view.findViewById(R.id.lesson_package_tags)
+        private var difficultyView: TextView = view.findViewById(R.id.lesson_package_difficulty)
         private var recycler: RecyclerView = view.findViewById(R.id.lesson_package_recycler_view)
 
-        fun bind(name: String, pack: JSONObject) {
-            title.text = name
+        fun bind(title: String, tags: JSONArray, difficulty: Int, pack: JSONObject) {
+            titleView.text = title
+            var tagsList = arrayListOf<String>()
+            for (i in 0..<tags.length()) {
+                tagsList.add(tags.getString(i))
+            }
+            tagsView.text = tagsList.joinToString(", ")
+            difficultyView.text = view.context.getString(R.string.difficulty_format).format(difficulty)
             recycler.layoutManager = LinearLayoutManager(view.context)
             recycler.adapter = LessonsRecyclerAdapter(pack)
             recycler.addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))

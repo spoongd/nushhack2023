@@ -10,9 +10,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.nushhack.keko.databinding.ActivityLessonBinding
 import org.json.JSONObject
 
-class LessonActivity : AppCompatActivity(), PagerCommunication {
+class LessonActivity : AppCompatActivity(), PagerCommunication, ScoreCommunication {
     private lateinit var binding: ActivityLessonBinding
-    private lateinit var lectureFragment: LectureFragment;
+    private lateinit var lectureFragment: LectureFragment
+    private lateinit var completionFragment: CompletionFragment
     private val fragments = arrayListOf<Fragment>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +35,14 @@ class LessonActivity : AppCompatActivity(), PagerCommunication {
 
         lectureFragment = LectureFragment.newInstance("nerd")
         fragments.add(lectureFragment)
-
         val questions = lesson.getJSONArray("quiz")
         for (i in 0..<questions.length()) {
             val question = questions.getJSONObject(i)
             fragments.add(QuizFragment.newInstance(i == questions.length() - 1, question))
         }
+        completionFragment = CompletionFragment.newInstance(title, questions.length())
+        fragments.add(completionFragment)
+
         binding.content.viewPager.adapter = LessonPagerAdapter(this, fragments)
         binding.content.viewPager.isUserInputEnabled = false
         binding.content.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
@@ -54,9 +57,15 @@ class LessonActivity : AppCompatActivity(), PagerCommunication {
                 binding.toolbarTitle.translationX = -positionOffset * binding.toolbar.width
                 binding.toolbarTitle2.translationX = -positionOffset * binding.toolbar.width + binding.toolbar.width
 
-                binding.toolbarTitle2.text = getString(R.string.question_number_template).format(position + 1)
+                if (position == questions.length()) {
+                    binding.toolbarTitle2.text = getString(R.string.completed_title)
+                } else {
+                    binding.toolbarTitle2.text = getString(R.string.question_number_template).format(position + 1)
+                }
                 if (position == 0) {
                     binding.toolbarTitle.text = getString(R.string.lecture_video_title)
+                } else if (position == questions.length() + 1) {
+                    binding.toolbarTitle.text = getString(R.string.completed_title)
                 } else {
                     binding.toolbarTitle.text = getString(R.string.question_number_template).format(position)
                 }
@@ -82,6 +91,10 @@ class LessonActivity : AppCompatActivity(), PagerCommunication {
 
     override fun previousPage() {
         binding.content.viewPager.currentItem--
+    }
+
+    override fun increaseScore() {
+        completionFragment.increaseScore()
     }
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)

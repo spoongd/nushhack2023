@@ -33,4 +33,9 @@
     <string name="finish_text">Finish</string>
 
     <string name="key_path">path</string>
+    <string name="loading_text">Loading...</string>
+    <string name="difficulty_format">Difficulty: %d/100</string>
+    <string name="completion_message"><b>Congratulations</b> on completing \'%s\'!\n\nYour score for the quiz is <b>%d/%d</b>.</string>
+    <string name="exit_text">Exit</string>
+    <string name="completed_title">Completed</string>
 </resources>

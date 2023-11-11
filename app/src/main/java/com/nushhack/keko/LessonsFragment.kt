@@ -6,6 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.nushhack.keko.databinding.FragmentLessonsBinding
 import org.json.JSONObject
 
@@ -15,36 +20,32 @@ class LessonsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentLessonsBinding.inflate(inflater, container, false)
         binding.lessonRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.lessonRecyclerView.adapter = PackagesRecyclerAdapter(JSONObject("{\n" +
-                "  'packageID': {\n" +
-                "    'title': 'the title',\n" +
-                "    'lessons': ['someID', 'someOtherID']\n" +
-                "  },\n" +
-                "  'package2ID': {\n" +
-                "    'title': 'the title 2',\n" +
-                "    'lessons': ['evenOtherID']\n" +
-                "  }\n" +
-                "}"), JSONObject("{\n" +
-                "  'someID': {\n" +
-                "    'package': 'packageID',\n" +
-                "    'title': 'some title',\n" +
-                "    'lecture': 'videoID',\n" +
-                "    'quiz': [{'question': 'What  is 1 + 1?', 'options': ['1', '2', '3', '4'], 'answer': '2'}]\n" +
-                "  },\n" +
-                "  'someOtherID': {\n" +
-                "    'package': 'packageID',\n" +
-                "    'title': 'some other title',\n" +
-                "    'lecture': 'videoID',\n" +
-                "    'quiz': [{'question': 'What  is 2 + 1?', 'options': ['1', '2', '3', '4'], 'answer': '3'}]\n" +
-                "  },\n" +
-                "  'evenOtherID': {\n" +
-                "    'package': 'package2ID',\n" +
-                "    'title': 'even other title',\n" +
-                "    'lecture': 'videoID',\n" +
-                "    'quiz': [{'question': 'What  is 3 + 1?', 'options': ['1', '2', '3', '4'], 'answer': '4'}]\n" +
-                "  }\n" +
-                "}"))
+        val queue = Volley.newRequestQueue(context)
+        var requests = 2
+        var packages = JSONObject()
+        var lessons = JSONObject()
+        queue.add(StringRequest(Request.Method.GET, "http://34.125.233.174:5000/get-packages",
+            {response ->
+                packages = JSONObject(response)
+                requests--
+                if (requests == 0)  {
+                    bindAdapter(packages, lessons)
+                }
+            }, {}))
+        queue.add(StringRequest(Request.Method.GET, "http://34.125.233.174:5000/get-lessons",
+            {response ->
+                lessons = JSONObject(response)
+                requests--
+                if (requests == 0) {
+                    bindAdapter(packages, lessons)
+                }
+            }, {}))
         return binding.root
+    }
+
+    fun bindAdapter(packages: JSONObject, lessons: JSONObject) {
+        binding.loading.visibility = View.GONE
+        binding.lessonRecyclerView.adapter = PackagesRecyclerAdapter(packages, lessons)
     }
 
 }

@@ -22,6 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:textAlignment="textStart"
                 android:textSize="12sp"
                 android:layout_weight="1"/>
             <TextView
@@ -29,9 +30,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:textAlignment="textEnd"
                 android:textSize="12sp"
                 android:layout_weight="1"/>
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/lesson_package_title"

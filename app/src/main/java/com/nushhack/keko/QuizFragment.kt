@@ -15,6 +15,7 @@ class QuizFragment : Fragment() {
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
     private lateinit var pagerCallback: PagerCommunication
+    private lateinit var scoreCallback: ScoreCommunication
     private var finish: Boolean? = null
     private var question: String? = null
     private var options: ArrayList<String>? = null
@@ -30,6 +31,7 @@ class QuizFragment : Fragment() {
             answer = it.getInt("answer")
         }
         pagerCallback = activity as PagerCommunication
+        scoreCallback = activity as ScoreCommunication
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
@@ -53,6 +55,7 @@ class QuizFragment : Fragment() {
                 binding.resultText.text = getString(R.string.unselected_text)
                 binding.resultText.setTextColor(resources.getColor(R.color.unselected_text_color, requireContext().theme))
             } else {
+                scoreCallback.increaseScore()
                 for (button in radioButtons) {
                     button.isEnabled = false
                 }
