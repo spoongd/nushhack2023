@@ -23,6 +23,8 @@
             android:exported="false" />
         <activity
             android:name=".LessonActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

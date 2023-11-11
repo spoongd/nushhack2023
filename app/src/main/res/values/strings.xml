@@ -23,6 +23,14 @@
     <string name="intent_lesson_id">lesson_id</string>
     <string name="question_number_template">Question %d</string>
     <string name="submit_text">Submit</string>
+    <string name="unselected_text">Select an option to submit.</string>
+    <string name="correct_answer_text">Correct!</string>
+    <string name="wrong_answer_text">Wrong!</string>
+    <string name="next_text">Next</string>
+    <string name="previous_text">Previous</string>
+    <string name="lecture_video_title">Lecture</string>
+    <string name="pip_text">Pop out</string>
+    <string name="finish_text">Finish</string>
 
     <string name="key_path">path</string>
 </resources>
