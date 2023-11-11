@@ -55,7 +55,6 @@ class QuizFragment : Fragment() {
                 binding.resultText.text = getString(R.string.unselected_text)
                 binding.resultText.setTextColor(resources.getColor(R.color.unselected_text_color, requireContext().theme))
             } else {
-                scoreCallback.increaseScore()
                 for (button in radioButtons) {
                     button.isEnabled = false
                 }
@@ -66,6 +65,7 @@ class QuizFragment : Fragment() {
                         binding.answerRadios.checkedRadioButtonId
                     ))
                 if (chosen == answer) {
+                    scoreCallback.increaseScore()
                     radioButtons[chosen].setBackgroundColor(resources.getColor(R.color.radio_correct_color, requireContext().theme))
                     binding.resultText.text = getText(R.string.correct_answer_text)
                     binding.resultText.setTextColor(resources.getColor(R.color.correct_text_color, requireContext().theme))

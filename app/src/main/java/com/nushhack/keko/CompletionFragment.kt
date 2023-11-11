@@ -24,11 +24,16 @@ class CompletionFragment : Fragment() {
 
     fun increaseScore() {
         score++
+        updateScore()
+    }
+
+    fun updateScore() {
+        _binding?.completionText?.text = getString(R.string.completion_message).format(title, score, maxScore)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCompletionBinding.inflate(inflater, container, false)
-        binding.completionText.text = getString(R.string.completion_message).format(title, score, maxScore)
+        updateScore()
         binding.exitButton.setOnClickListener {
             activity?.finish()
         }

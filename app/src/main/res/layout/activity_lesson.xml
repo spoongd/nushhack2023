@@ -28,7 +28,7 @@ tools:context=".LessonActivity">
                     android:layout_gravity="center_vertical"
                     android:textSize="28sp"
                     android:textStyle="bold"
-                    android:text="Nerd"/>
+                    android:text="@string/loading_text"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
