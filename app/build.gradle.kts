@@ -56,9 +56,11 @@ dependencies {
     implementation("me.relex:circleindicator:2.1.6")
 
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("com.google.android.material:material:1.10.0")
 
     implementation("com.android.volley:volley:1.2.1")
-    implementation("io.coil-kt:coil:2.5.0")
+
+    implementation("com.squareup.picasso:picasso:2.8")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -1,5 +1,6 @@
 package com.nushhack.keko
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +21,9 @@ class LessonsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentLessonsBinding.inflate(inflater, container, false)
         binding.lessonRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        binding.welcomeTextView.text = "Hello ${requireActivity().getPreferences(Context.MODE_PRIVATE).getString("Name", "New User")}!"
+
         val queue = Volley.newRequestQueue(context)
         var requests = 2
         var packages = JSONObject()
