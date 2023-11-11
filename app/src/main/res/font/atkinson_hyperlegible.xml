@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/atkinson_reg"
+
+        app:fontStyle="normal"
+        app:fontWeight="400"
+        app:font="@font/atkinson_reg" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/atkinson_regi"
+
+        app:fontStyle="italic"
+        app:fontWeight="400"
+        app:font="@font/atkinson_regi" />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="600"
+        android:font="@font/atkinson_bold"
+
+        app:fontStyle="normal"
+        app:fontWeight="600"
+        app:font="@font/atkinson_bold" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="600"
+        android:font="@font/atkinson_boldi"
+
+        app:fontStyle="italic"
+        app:fontWeight="600"
+        app:font="@font/atkinson_boldi" />
+</font-family>
